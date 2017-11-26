@@ -1,0 +1,7 @@
+return (
+  <Slide>
+    <Heading size={6} textColor="primary" caps>
+      Typography
+    </Heading>
+  </Slide>
+)
