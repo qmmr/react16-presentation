@@ -52,7 +52,7 @@ export default class Presentation extends React.Component {
 						<ListItem>
 							Render Multiple Elements without a Wrapping Element in a Component
 						</ListItem>
-						<ListItem>Item 3</ListItem>
+						<ListItem>Render Text Only Components</ListItem>
 						<ListItem>Item 4</ListItem>
 					</List>
 					<Text margin="10px 0 0" textColor="tertiary" size={1} fit bold />
@@ -187,11 +187,31 @@ ReactDOM.render(<App />, document.getElementById('root'));
 					bgColor="primary"
 					notes="<ul><li>talk about that</li><li>and that</li></ul>"
 				>
+					<Heading size={5} textColor="secondary">
+						Render Text Only Components
+					</Heading>
 					<CodePane
 						lang="jsx"
 						margin="20px auto"
 						overflow="overflow"
-						source={`<Text>Hello there!</Text>`}
+						source={`
+const Comment = ({ text }) => text
+    .replace(':)', '😊')
+    .replace(':D', '😀')
+    .replace(':(', '🙁');
+
+class App extends React.Component {
+  render() {
+    return (
+      <div>
+        <Comment text="Today we are sailing home :)" />
+      </div>
+    );
+  }
+}
+
+ReactDOM.render(<App />, document.getElementById('root'));
+`}
 					/>
 				</Slide>
 				<Slide transition={['fade']} bgColor="secondary" textColor="primary">
