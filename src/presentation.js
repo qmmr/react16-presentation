@@ -79,6 +79,51 @@ export default class Presentation extends React.Component {
 					</List>
 					<Text color="red">Errors are NOT caught inside event handlers!</Text>
 				</Slide>
+				<Slide transition={['fade']} bgColor="primary" textColor="tertiary">
+					<CodePane
+						lang="jsx"
+						margin="20px auto"
+						overflow="overflow"
+						source={`
+    const Hello = ({user}) => {
+      return <h1>Hello {user.name}!</h1>;
+    }
+
+    class ErrorBoundaries extends React.Component {
+      constructor(props) {
+        super(props);
+        this.state = {
+          hasError: false,
+          error: null,
+          info: null
+        };
+      }
+
+      componentDidCatch(error, info) {
+        this.setState(state => ({ ...state, hasError: true, error, info }));
+      }
+
+      render() {
+        if (this.state.hasError) {
+          return <div style={styles.error}>!Error: {this.state.error.message}</div>;
+        } else {
+          return this.props.children;
+        }
+      }
+    }
+
+    const App = () => (
+      <div style={styles}>
+        <ErrorBoundaries>
+          <Hello />
+        </ErrorBoundaries>
+      </div>
+    );
+
+    render(<App />, document.getElementById("root"));
+    `}
+					/>
+				</Slide>
 				<Slide
 					transition={['fade']}
 					bgColor="primary"
