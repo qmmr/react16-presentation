@@ -53,7 +53,9 @@ export default class Presentation extends React.Component {
 							Render Multiple Elements without a Wrapping Element in a Component
 						</ListItem>
 						<ListItem>Render Text Only Components</ListItem>
-						<ListItem>Item 4</ListItem>
+						<ListItem>
+							Render Elements Outside the Current React Tree using Portals
+						</ListItem>
 					</List>
 					<Text margin="10px 0 0" textColor="tertiary" size={1} fit bold />
 				</Slide>
@@ -195,10 +197,15 @@ ReactDOM.render(<App />, document.getElementById('root'));
 						margin="20px auto"
 						overflow="overflow"
 						source={`
-const Comment = ({ text }) => text
+const Comment = ({ text }) => (
+  <span>
+  {text
     .replace(':)', '😊')
     .replace(':D', '😀')
-    .replace(':(', '🙁');
+    .replace(':(', '🙁')
+  }
+  </span>
+)
 
 class App extends React.Component {
   render() {
@@ -212,6 +219,32 @@ class App extends React.Component {
 
 ReactDOM.render(<App />, document.getElementById('root'));
 `}
+					/>
+				</Slide>
+				<Slide transition={['fade']} bgColor="primary" textColor="tertiary">
+					<CodePane
+						lang="jsx"
+						margin="20px auto"
+						overflow="overflow"
+						notes={`live demo: "https://csb-ymz9q04ozv-bolcaexqbb.now.sh/"`}
+						source={`
+              class App extends React.Component {
+                render() {
+                  return (
+                    <div>
+                      <h1>Dashboard</h1>
+                      {ReactDOM.createPortal(
+                        <div>I come from another dimension!</div>,
+                        document.getElementById('portal')
+                      )}
+                    </div>
+                  );
+                }
+              }
+
+              ReactDOM.render(<App />, document.getElementById('root'));
+
+    `}
 					/>
 				</Slide>
 				<Slide transition={['fade']} bgColor="secondary" textColor="primary">
