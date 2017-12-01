@@ -4,7 +4,6 @@ import React from 'react'
 // Import Spectacle Core tags
 import {
 	BlockQuote,
-	Cite,
 	CodePane,
 	ComponentPlayground,
 	Deck,
@@ -45,7 +44,7 @@ export default class Presentation extends React.Component {
 			>
 				<Slide transition={['zoom']} bgColor="primary">
 					<Heading size={1} fit caps lineHeight={1} textColor="secondary">
-						Whats new in React v16?
+						What is new in React v16? 🤔
 					</Heading>
 					<List>
 						<ListItem>Error Handling using Error Boundaries</ListItem>
@@ -57,8 +56,16 @@ export default class Presentation extends React.Component {
 							Render Elements Outside the Current React Tree using Portals
 						</ListItem>
 						<ListItem>Define DOM Attributes</ListItem>
+						<ListItem>
+							Call setState with null to Avoid Triggering an Update
+						</ListItem>
 					</List>
 					<Text margin="10px 0 0" textColor="tertiary" size={1} fit bold />
+				</Slide>
+				<Slide transition={['fade']} bgColor="secondary" textColor="primary">
+					<BlockQuote>
+						<Quote>Error Handling using Error Boundaries</Quote>
+					</BlockQuote>
 				</Slide>
 				<Slide
 					transition={['fade']}
@@ -81,6 +88,9 @@ export default class Presentation extends React.Component {
 					<Text color="red">Errors are NOT caught inside event handlers!</Text>
 				</Slide>
 				<Slide transition={['fade']} bgColor="primary" textColor="tertiary">
+					<Heading size={5} textColor="secondary">
+						Error Handling using Error Boundaries
+					</Heading>
 					<CodePane
 						lang="jsx"
 						margin="20px auto"
@@ -124,6 +134,13 @@ const App = () => (
 render(<App />, document.getElementById("root"));
     `}
 					/>
+				</Slide>
+				<Slide transition={['fade']} bgColor="secondary" textColor="primary">
+					<BlockQuote>
+						<Quote>
+							Render Multiple Elements without a Wrapping Element in a Component
+						</Quote>
+					</BlockQuote>
 				</Slide>
 				<Slide
 					transition={['fade']}
@@ -182,6 +199,11 @@ ReactDOM.render(<App />, document.getElementById('root'));
 `}
 					/>
 				</Slide>
+				<Slide transition={['fade']} bgColor="secondary" textColor="primary">
+					<BlockQuote>
+						<Quote>Render Text Only Components</Quote>
+					</BlockQuote>
+				</Slide>
 				<Slide
 					transitionIn={['zoom', 'fade']}
 					transitionOut={['slide', 'fade']}
@@ -189,7 +211,7 @@ ReactDOM.render(<App />, document.getElementById('root'));
 					notes=""
 				>
 					<Heading size={5} textColor="secondary">
-						Render Text Only Components in React 16
+						Render Text Only Components in older versions of React
 					</Heading>
 					<CodePane
 						lang="jsx"
@@ -253,6 +275,13 @@ ReactDOM.render(<App />, document.getElementById('root'));
 `}
 					/>
 				</Slide>
+				<Slide transition={['fade']} bgColor="secondary" textColor="primary">
+					<BlockQuote>
+						<Quote>
+							Render Elements Outside the Current React Tree using Portals
+						</Quote>
+					</BlockQuote>
+				</Slide>
 				<Slide transition={['fade']} bgColor="primary" textColor="tertiary">
 					<Heading size={5} textColor="secondary">
 						Render Elements Outside the Current React Tree using Portals
@@ -281,6 +310,11 @@ ReactDOM.render(<App />, document.getElementById('root'));
 
     `}
 					/>
+				</Slide>
+				<Slide transition={['fade']} bgColor="secondary" textColor="primary">
+					<BlockQuote>
+						<Quote>Define DOM Attributes</Quote>
+					</BlockQuote>
 				</Slide>
 				<Slide
 					transitionIn={['zoom', 'fade']}
@@ -322,7 +356,10 @@ class App extends React.Component {
 					/>
 				</Slide>
 				<Slide transition={['fade']} bgColor="secondary" textColor="primary">
-					<ComponentPlayground theme="light" />
+					<BlockQuote>
+						<Quote>Call setState with null to Avoid Triggering an Update</Quote>
+					</BlockQuote>
+				</Slide>
 				<Slide
 					transitionIn={['zoom', 'fade']}
 					transitionOut={['slide', 'fade']}
@@ -374,9 +411,16 @@ class App extends React.Component {
 				</Slide>
 				<Slide transition={['fade']} bgColor="secondary" textColor="primary">
 					<BlockQuote>
-						<Quote>Example Quote</Quote>
-						<Cite>Author</Cite>
+						<Quote>Questions?</Quote>
 					</BlockQuote>
+				</Slide>
+				<Slide transition={['fade']} bgColor="secondary" textColor="primary">
+					<BlockQuote>
+						<Quote>THE END</Quote>
+					</BlockQuote>
+				</Slide>
+				<Slide transition={['fade']} bgColor="secondary" textColor="primary">
+					<ComponentPlayground theme="light" />
 				</Slide>
 			</Deck>
 		)
