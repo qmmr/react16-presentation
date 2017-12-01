@@ -56,6 +56,7 @@ export default class Presentation extends React.Component {
 						<ListItem>
 							Render Elements Outside the Current React Tree using Portals
 						</ListItem>
+						<ListItem>Define DOM Attributes</ListItem>
 					</List>
 					<Text margin="10px 0 0" textColor="tertiary" size={1} fit bold />
 				</Slide>
@@ -63,11 +64,9 @@ export default class Presentation extends React.Component {
 					transition={['fade']}
 					bgColor="primary"
 					textColor="tertiary"
-					notes={`
-          <ul>
-            <li>worth creating a errorReportingService so that we log where and what happened</li>
-            <li>uncaught errors result in unmounting of the whole component tree (new in React 16)</li>
-          </ul>`}
+					notes={
+						'<ul> <li>worth creating a errorReportingService so that we log where and what happened</li> <li>uncaught errors result in unmounting of the whole component tree (new in React 16)</li> </ul>'
+					}
 				>
 					<Heading size={5} textColor="secondary">
 						Error Handling using Error Boundaries
@@ -87,42 +86,42 @@ export default class Presentation extends React.Component {
 						margin="20px auto"
 						overflow="overflow"
 						source={`
-    const Hello = ({user}) => {
-      return <h1>Hello {user.name}!</h1>;
+const Hello = ({user}) => {
+  return <h1>Hello {user.name}!</h1>;
+}
+
+class ErrorBoundaries extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      hasError: false,
+      error: null,
+      info: null
+    };
+  }
+
+  componentDidCatch(error, info) {
+    this.setState(state => ({ ...state, hasError: true, error, info }));
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return <div style={styles.error}>!Error: {this.state.error.message}</div>;
+    } else {
+      return this.props.children;
     }
+  }
+}
 
-    class ErrorBoundaries extends React.Component {
-      constructor(props) {
-        super(props);
-        this.state = {
-          hasError: false,
-          error: null,
-          info: null
-        };
-      }
+const App = () => (
+  <div style={styles}>
+    <ErrorBoundaries>
+      <Hello />
+    </ErrorBoundaries>
+  </div>
+);
 
-      componentDidCatch(error, info) {
-        this.setState(state => ({ ...state, hasError: true, error, info }));
-      }
-
-      render() {
-        if (this.state.hasError) {
-          return <div style={styles.error}>!Error: {this.state.error.message}</div>;
-        } else {
-          return this.props.children;
-        }
-      }
-    }
-
-    const App = () => (
-      <div style={styles}>
-        <ErrorBoundaries>
-          <Hello />
-        </ErrorBoundaries>
-      </div>
-    );
-
-    render(<App />, document.getElementById("root"));
+render(<App />, document.getElementById("root"));
     `}
 					/>
 				</Slide>
@@ -187,10 +186,10 @@ ReactDOM.render(<App />, document.getElementById('root'));
 					transitionIn={['zoom', 'fade']}
 					transitionOut={['slide', 'fade']}
 					bgColor="primary"
-					notes="<ul><li>talk about that</li><li>and that</li></ul>"
+					notes=""
 				>
 					<Heading size={5} textColor="secondary">
-						Render Text Only Components
+						Render Text Only Components in React 16
 					</Heading>
 					<CodePane
 						lang="jsx"
@@ -221,30 +220,105 @@ ReactDOM.render(<App />, document.getElementById('root'));
 `}
 					/>
 				</Slide>
+				<Slide
+					transitionIn={['zoom', 'fade']}
+					transitionOut={['slide', 'fade']}
+					bgColor="primary"
+					notes=""
+				>
+					<Heading size={5} textColor="secondary">
+						Render Text Only Components in React 16
+					</Heading>
+					<CodePane
+						lang="jsx"
+						margin="20px auto"
+						overflow="overflow"
+						source={`
+const Comment = ({ text }) => text
+  .replace(':)', '😊')
+  .replace(':D', '😀')
+  .replace(':(', '🙁');
+
+class App extends React.Component {
+  render() {
+    return (
+      <div>
+        <Comment text="Today we are sailing home :)" />
+      </div>
+    );
+  }
+}
+
+ReactDOM.render(<App />, document.getElementById('root'));
+`}
+					/>
+				</Slide>
 				<Slide transition={['fade']} bgColor="primary" textColor="tertiary">
+					<Heading size={5} textColor="secondary">
+						Render Elements Outside the Current React Tree using Portals
+					</Heading>
 					<CodePane
 						lang="jsx"
 						margin="20px auto"
 						overflow="overflow"
 						notes={`live demo: "https://csb-ymz9q04ozv-bolcaexqbb.now.sh/"`}
 						source={`
-              class App extends React.Component {
-                render() {
-                  return (
-                    <div>
-                      <h1>Dashboard</h1>
-                      {ReactDOM.createPortal(
-                        <div>I come from another dimension!</div>,
-                        document.getElementById('portal')
-                      )}
-                    </div>
-                  );
-                }
-              }
+class App extends React.Component {
+  render() {
+    return (
+      <div>
+        <h1>Dashboard</h1>
+        {ReactDOM.createPortal(
+          <div>I come from another dimension!</div>,
+          document.getElementById('portal')
+        )}
+      </div>
+    );
+  }
+}
 
-              ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(<App />, document.getElementById('root'));
 
     `}
+					/>
+				</Slide>
+				<Slide
+					transitionIn={['zoom', 'fade']}
+					transitionOut={['slide', 'fade']}
+					bgColor="primary"
+					notes=""
+				>
+					<Heading size={5} textColor="secondary">
+						Define DOM Attributes
+					</Heading>
+					<CodePane
+						lang="jsx"
+						margin="20px auto"
+						overflow="overflow"
+						source={`
+class App extends React.Component {
+  render() {
+    return (
+      <div
+        my-attribute="foo"
+        // my-lucky-number={42}
+        // tabindex="-1"
+        // tabIndex="-1"
+        class="bar"
+      // className={false}
+      // className={NaN}
+      // className={() => null}
+      // className={Symbol('foo')}
+      // className={{ foo: 'bar' }}
+      // className={foo}
+      // onclick="alert('Hi!')"
+      >
+        Hello!
+      </div>
+    );
+  }
+}
+`}
 					/>
 				</Slide>
 				<Slide transition={['fade']} bgColor="secondary" textColor="primary">
