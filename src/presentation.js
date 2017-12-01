@@ -44,7 +44,10 @@ export default class Presentation extends React.Component {
 			>
 				<Slide transition={['zoom']} bgColor="primary">
 					<Heading size={1} fit caps lineHeight={1} textColor="secondary">
-						What is new in React v16? 🤔
+						What is new in React v16?{' '}
+						<span role="img" aria-label="emoji">
+							🤔
+						</span>
 					</Heading>
 					<List>
 						<ListItem>Error Handling using Error Boundaries</ListItem>
