@@ -323,6 +323,54 @@ class App extends React.Component {
 				</Slide>
 				<Slide transition={['fade']} bgColor="secondary" textColor="primary">
 					<ComponentPlayground theme="light" />
+				<Slide
+					transitionIn={['zoom', 'fade']}
+					transitionOut={['slide', 'fade']}
+					bgColor="primary"
+					notes="<ul><li>talk about that</li><li>and that</li></ul>"
+				>
+					<Heading size={5} textColor="secondary">
+						Call setState with null to Avoid Triggering an Update
+					</Heading>
+					<CodePane
+						lang="jsx"
+						margin="20px auto"
+						overflow="overflow"
+						source={`
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { city: 'London' };
+  }
+
+  selectCity = evt => {
+    const newValue = evt.target.value;
+    this.setState(state => {
+      if (state.city === newValue) {
+        return null;
+      }
+      return {
+        city: newValue
+      };
+    });
+  };
+
+  render() {
+    return (
+      <div>
+        <button type="button" value="London" onClick={this.selectCity}>
+          London
+        </button>
+        <button type="button" value="Kraków" onClick={this.selectCity}>
+          Kraków
+        </button>
+        <City name={this.state.city} />
+      </div>
+    );
+  }
+}
+`}
+					/>
 				</Slide>
 				<Slide transition={['fade']} bgColor="secondary" textColor="primary">
 					<BlockQuote>
