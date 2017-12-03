@@ -3,11 +3,14 @@ import React from 'react'
 
 // Import Spectacle Core tags
 import {
+	Appear,
 	BlockQuote,
+	Code,
 	CodePane,
 	ComponentPlayground,
 	Deck,
 	Heading,
+	Link,
 	ListItem,
 	List,
 	Quote,
@@ -50,18 +53,66 @@ export default class Presentation extends React.Component {
 						</span>
 					</Heading>
 					<List>
-						<ListItem>Error Handling using Error Boundaries</ListItem>
-						<ListItem>
-							Render Multiple Elements without a Wrapping Element in a Component
-						</ListItem>
-						<ListItem>Render Text Only Components</ListItem>
-						<ListItem>
-							Render Elements Outside the Current React Tree using Portals
-						</ListItem>
-						<ListItem>Define DOM Attributes</ListItem>
-						<ListItem>
-							Call setState with null to Avoid Triggering an Update
-						</ListItem>
+						<Appear order="1">
+							<ListItem>
+								<Link
+									href="https://reactjs.org/blog/2017/09/26/react-v16.0.html#better-error-handling"
+									target="_blank"
+								>
+									Error Handling using Error Boundaries
+								</Link>
+							</ListItem>
+						</Appear>
+						<Appear order="2">
+							<ListItem>
+								<Link
+									href="https://reactjs.org/blog/2017/09/26/react-v16.0.html#new-render-return-types-fragments-and-strings"
+									target="_blank"
+								>
+									Render Multiple Elements without a Wrapping Element in a
+									Component
+								</Link>
+							</ListItem>
+						</Appear>
+						<Appear order="3">
+							<ListItem>Render Text Only Components</ListItem>
+						</Appear>
+						<Appear order="4">
+							<ListItem>
+								<Link
+									href="https://reactjs.org/blog/2017/09/26/react-v16.0.html#portals"
+									target="_blank"
+								>
+									Render Elements Outside the Current React Tree using Portals
+								</Link>
+							</ListItem>
+						</Appear>
+						<Appear order="5">
+							<ListItem>
+								<Link
+									href="https://reactjs.org/blog/2017/09/26/react-v16.0.html#support-for-custom-dom-attributes"
+									target="_blank"
+								>
+									Define DOM Attributes
+								</Link>
+							</ListItem>
+						</Appear>
+						<Appear order="6">
+							<ListItem>
+								Call setState with null to Avoid Triggering an Update
+							</ListItem>
+						</Appear>
+						<Appear order="7">
+							<ListItem>
+								Bonus in <Code>v16.2.0</Code> 🎁
+								<Link
+									href="https://reactjs.org/blog/2017/11/28/react-v16.2.0-fragment-support.html"
+									target="_blank"
+								>
+									Fragments
+								</Link>
+							</ListItem>
+						</Appear>
 					</List>
 					<Text margin="10px 0 0" textColor="tertiary" size={1} fit bold />
 				</Slide>
@@ -69,26 +120,6 @@ export default class Presentation extends React.Component {
 					<BlockQuote>
 						<Quote>Error Handling using Error Boundaries</Quote>
 					</BlockQuote>
-				</Slide>
-				<Slide
-					transition={['fade']}
-					bgColor="primary"
-					textColor="tertiary"
-					notes={
-						'<ul> <li>worth creating a errorReportingService so that we log where and what happened</li> <li>uncaught errors result in unmounting of the whole component tree (new in React 16)</li> </ul>'
-					}
-				>
-					<Heading size={5} textColor="secondary">
-						Error Handling using Error Boundaries
-					</Heading>
-					<Text size={6}>Where errors are caught?</Text>
-					<List>
-						<ListItem size={5}>in function components</ListItem>
-						<ListItem>in render method</ListItem>
-						<ListItem>in lifecycle methods</ListItem>
-						<ListItem>in setState</ListItem>
-					</List>
-					<Text color="red">Errors are NOT caught inside event handlers!</Text>
 				</Slide>
 				<Slide transition={['fade']} bgColor="primary" textColor="tertiary">
 					<Heading size={5} textColor="secondary">
@@ -137,6 +168,26 @@ const App = () => (
 render(<App />, document.getElementById("root"));
     `}
 					/>
+				</Slide>
+				<Slide
+					transition={['fade']}
+					bgColor="primary"
+					textColor="tertiary"
+					notes={
+						'<ul> <li>worth creating a errorReportingService so that we log where and what happened</li> <li>uncaught errors result in unmounting of the whole component tree (new in React 16)</li> </ul>'
+					}
+				>
+					<Heading size={5} textColor="secondary">
+						Error Handling using Error Boundaries
+					</Heading>
+					<Text size={6}>Where errors are caught?</Text>
+					<List>
+						<ListItem size={5}>in function components</ListItem>
+						<ListItem>in render method</ListItem>
+						<ListItem>in lifecycle methods</ListItem>
+						<ListItem>in setState</ListItem>
+					</List>
+					<Text color="red">Errors are NOT caught inside event handlers!</Text>
 				</Slide>
 				<Slide transition={['fade']} bgColor="secondary" textColor="primary">
 					<BlockQuote>
