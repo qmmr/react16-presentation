@@ -7,7 +7,6 @@ import {
 	BlockQuote,
 	Code,
 	CodePane,
-	ComponentPlayground,
 	Deck,
 	Heading,
 	Image,
