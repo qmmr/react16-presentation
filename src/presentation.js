@@ -1,5 +1,5 @@
 // Import React
-import React from 'react'
+import React from 'react';
 
 // Import Spectacle Core tags
 import {
@@ -10,32 +10,33 @@ import {
 	ComponentPlayground,
 	Deck,
 	Heading,
+	Image,
 	Link,
 	ListItem,
 	List,
 	Quote,
 	Slide,
-	Text
-} from 'spectacle'
+	Text,
+} from 'spectacle';
 
 // Import theme
-import createTheme from 'spectacle/lib/themes/default'
+import createTheme from 'spectacle/lib/themes/default';
 
 // Require CSS
-require('normalize.css')
+require('normalize.css');
 
 const theme = createTheme(
 	{
 		primary: 'white',
 		secondary: '#ea5f6e',
 		tertiary: '#03A9FC',
-		quartenary: '#CECECE'
+		quartenary: '#CECECE',
 	},
 	{
 		primary: 'Montserrat',
-		secondary: 'Helvetica'
+		secondary: 'Helvetica',
 	}
-)
+);
 
 export default class Presentation extends React.Component {
 	render() {
@@ -133,6 +134,9 @@ export default class Presentation extends React.Component {
 						<Quote>Error Handling using Error Boundaries</Quote>
 					</BlockQuote>
 				</Slide>
+				<Slide transition={['fade']} bgColor="secondary" textColor="primary">
+					<Image src="https://media.giphy.com/media/n4A3gHZeHBXva/giphy.gif" />
+				</Slide>
 				<Slide transition={['fade']} bgColor="primary" textColor="tertiary">
 					<Text textColor="secondary">
 						Error Handling using Error Boundaries
@@ -201,6 +205,9 @@ render(<App />, document.getElementById("root"));
 							Render Multiple Elements without a Wrapping Element in a Component
 						</Quote>
 					</BlockQuote>
+				</Slide>
+				<Slide transition={['fade']} bgColor="secondary" textColor="primary">
+					<Image src="https://media.giphy.com/media/xnqTc4GQPA87u/giphy.gif" />
 				</Slide>
 				<Slide
 					transition={['fade']}
@@ -473,6 +480,47 @@ ReactDOM.render(<App />, document.getElementById('root'));`}
 }`}
 					/>
 				</Slide>
+				<Slide transition={['fade']} bgColor="primary" textColor="tertiary">
+					<Text textColor="secondary">Improved support for fragments</Text>
+					<CodePane
+						lang="jsx"
+						margin="20px auto"
+						overflow="overflow"
+						source={`const Fragment = React.Fragment;
+
+<Fragment>
+  <ChildA />
+  <ChildB />
+  <ChildC />
+</Fragment>
+
+// This also works
+<React.Fragment>
+  <ChildA />
+  <ChildB />
+  <ChildC />
+</React.Fragment>
+`}
+					/>
+				</Slide>
+				<Slide transition={['fade']} bgColor="primary" textColor="tertiary">
+					<Text textColor="secondary">Improved support for fragments</Text>
+					<CodePane
+						lang="jsx"
+						margin="20px auto"
+						overflow="overflow"
+						source={`render() {
+	return (
+	    <>
+	        <ChildA />
+	        <ChildB />
+	        <ChildC />
+	    </>
+	);
+}
+`}
+					/>
+				</Slide>
 				<Slide transition={['fade']} bgColor="secondary" textColor="primary">
 					<BlockQuote>
 						<Quote>Questions?</Quote>
@@ -483,10 +531,7 @@ ReactDOM.render(<App />, document.getElementById('root'));`}
 						<Quote>THE END</Quote>
 					</BlockQuote>
 				</Slide>
-				<Slide transition={['fade']} bgColor="secondary" textColor="primary">
-					<ComponentPlayground theme="light" />
-				</Slide>
 			</Deck>
-		)
+		);
 	}
 }
