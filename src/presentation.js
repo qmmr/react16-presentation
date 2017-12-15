@@ -27,7 +27,7 @@ require('normalize.css')
 const theme = createTheme(
 	{
 		primary: 'white',
-		secondary: '#1F2022',
+		secondary: '#ea5f6e',
 		tertiary: '#03A9FC',
 		quartenary: '#CECECE'
 	},
@@ -45,12 +45,25 @@ export default class Presentation extends React.Component {
 				transitionDuration={500}
 				theme={theme}
 			>
-				<Slide transition={['zoom']} bgColor="primary">
+				<Slide transition={['fade']} bgColor="primary" textColor="secondary">
 					<Heading size={1} fit caps lineHeight={1} textColor="secondary">
-						What is new in React v16?{' '}
+						What are the new goodies in React v16?{' '}
 						<span role="img" aria-label="emoji">
 							🤔
 						</span>
+					</Heading>
+				</Slide>
+				<Slide transition={['fade']} bgColor="primary" textColor="secondary">
+					<Heading size={6} textColor="secondary">
+						About myself:
+					</Heading>
+					<Text>Marcin</Text>
+					<Text>Front End Engineer</Text>
+					<Text textColor="secondary">@ Kalo</Text>
+				</Slide>
+				<Slide transition={['zoom']} bgColor="primary">
+					<Heading size={1} fit caps lineHeight={1} textColor="secondary">
+						Here are the new goodies in React v16
 					</Heading>
 					<List>
 						<Appear order="1">
@@ -114,7 +127,6 @@ export default class Presentation extends React.Component {
 							</ListItem>
 						</Appear>
 					</List>
-					<Text margin="10px 0 0" textColor="tertiary" size={1} fit bold />
 				</Slide>
 				<Slide transition={['fade']} bgColor="secondary" textColor="primary">
 					<BlockQuote>
@@ -122,26 +134,20 @@ export default class Presentation extends React.Component {
 					</BlockQuote>
 				</Slide>
 				<Slide transition={['fade']} bgColor="primary" textColor="tertiary">
-					<Heading size={5} textColor="secondary">
+					<Text textColor="secondary">
 						Error Handling using Error Boundaries
-					</Heading>
+					</Text>
 					<CodePane
 						lang="jsx"
 						margin="20px auto"
 						overflow="overflow"
 						source={`
-const Hello = ({user}) => {
-  return <h1>Hello {user.name}!</h1>;
-}
+const Hello = ({user}) => <h1>Hello {user.name}!</h1>;
 
 class ErrorBoundaries extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      hasError: false,
-      error: null,
-      info: null
-    };
+    this.state = {hasError: false, error: null, info: null};
   }
 
   componentDidCatch(error, info) {
@@ -149,11 +155,9 @@ class ErrorBoundaries extends React.Component {
   }
 
   render() {
-    if (this.state.hasError) {
-      return <div style={styles.error}>!Error: {this.state.error.message}</div>;
-    } else {
-      return this.props.children;
-    }
+    return this.state.hasError
+      ? <div style={styles.error}>!Error: {this.state.error.message}</div>
+      : this.props.children;
   }
 }
 
@@ -181,13 +185,15 @@ render(<App />, document.getElementById("root"));
 						Error Handling using Error Boundaries
 					</Heading>
 					<Text size={6}>Where errors are caught?</Text>
-					<List>
+					<List textColor="black">
 						<ListItem size={5}>in function components</ListItem>
 						<ListItem>in render method</ListItem>
 						<ListItem>in lifecycle methods</ListItem>
 						<ListItem>in setState</ListItem>
 					</List>
-					<Text color="red">Errors are NOT caught inside event handlers!</Text>
+					<Text textColor="secondary">
+						Errors are NOT caught inside event handlers!
+					</Text>
 				</Slide>
 				<Slide transition={['fade']} bgColor="secondary" textColor="primary">
 					<BlockQuote>
@@ -207,15 +213,14 @@ render(<App />, document.getElementById("root"));
             <li>you can use wrapper component or use array</li>
           </ul>`}
 				>
-					<Heading size={5} textColor="secondary">
+					<Text textColor="secondary">
 						Render Multiple Elements without a Wrapping Element in a Component
-					</Heading>
+					</Text>
 					<CodePane
 						lang="jsx"
 						margin="20px auto"
 						overflow="overflow"
-						source={`
-const Aux = props => props.children;
+						source={`const Aux = props => props.children;
 
 const Fruits = () => (
   <Aux>
@@ -233,8 +238,28 @@ class MoreFruits extends React.Component {
     ];
   }
 }
-
-class App extends React.Component {
+`}
+					/>
+				</Slide>
+				<Slide
+					transition={['fade']}
+					bgColor="primary"
+					textColor="tertiary"
+					notes={`
+          <ul>
+            <li>until React 16 it was only possible to render one element</li>
+            <li>key property is needed to let React know how to handle multiple elements</li>
+            <li>you can use wrapper component or use array</li>
+          </ul>`}
+				>
+					<Text textColor="secondary">
+						Render Multiple Elements without a Wrapping Element in a Component
+					</Text>
+					<CodePane
+						lang="jsx"
+						margin="20px auto"
+						overflow="overflow"
+						source={`class App extends React.Component {
   render() {
     return (
       <div>
@@ -264,21 +289,20 @@ ReactDOM.render(<App />, document.getElementById('root'));
 					bgColor="primary"
 					notes=""
 				>
-					<Heading size={5} textColor="secondary">
+					<Text textColor="secondary">
 						Render Text Only Components in older versions of React
-					</Heading>
+					</Text>
 					<CodePane
 						lang="jsx"
 						margin="20px auto"
 						overflow="overflow"
-						source={`
-const Comment = ({ text }) => (
+						source={`const Comment = ({ text }) => (
   <span>
-  {text
-    .replace(':)', '😊')
-    .replace(':D', '😀')
-    .replace(':(', '🙁')
-  }
+    {text
+      .replace(':)', '😊')
+      .replace(':D', '😀')
+      .replace(':(', '🙁')
+    }
   </span>
 )
 
@@ -302,15 +326,14 @@ ReactDOM.render(<App />, document.getElementById('root'));
 					bgColor="primary"
 					notes=""
 				>
-					<Heading size={5} textColor="secondary">
+					<Text textColor="secondary">
 						Render Text Only Components in React 16
-					</Heading>
+					</Text>
 					<CodePane
 						lang="jsx"
 						margin="20px auto"
 						overflow="overflow"
-						source={`
-const Comment = ({ text }) => text
+						source={`const Comment = ({ text }) => text
   .replace(':)', '😊')
   .replace(':D', '😀')
   .replace(':(', '🙁');
@@ -337,16 +360,15 @@ ReactDOM.render(<App />, document.getElementById('root'));
 					</BlockQuote>
 				</Slide>
 				<Slide transition={['fade']} bgColor="primary" textColor="tertiary">
-					<Heading size={5} textColor="secondary">
+					<Text textColor="secondary">
 						Render Elements Outside the Current React Tree using Portals
-					</Heading>
+					</Text>
 					<CodePane
 						lang="jsx"
 						margin="20px auto"
 						overflow="overflow"
 						notes={`live demo: "https://csb-ymz9q04ozv-bolcaexqbb.now.sh/"`}
-						source={`
-class App extends React.Component {
+						source={`class App extends React.Component {
   render() {
     return (
       <div>
@@ -360,9 +382,7 @@ class App extends React.Component {
   }
 }
 
-ReactDOM.render(<App />, document.getElementById('root'));
-
-    `}
+ReactDOM.render(<App />, document.getElementById('root'));`}
 					/>
 				</Slide>
 				<Slide transition={['fade']} bgColor="secondary" textColor="primary">
@@ -376,15 +396,12 @@ ReactDOM.render(<App />, document.getElementById('root'));
 					bgColor="primary"
 					notes=""
 				>
-					<Heading size={5} textColor="secondary">
-						Define DOM Attributes
-					</Heading>
+					<Text textColor="secondary">Define DOM Attributes</Text>
 					<CodePane
 						lang="jsx"
 						margin="20px auto"
 						overflow="overflow"
-						source={`
-class App extends React.Component {
+						source={`class App extends React.Component {
   render() {
     return (
       <div
@@ -405,8 +422,7 @@ class App extends React.Component {
       </div>
     );
   }
-}
-`}
+}`}
 					/>
 				</Slide>
 				<Slide transition={['fade']} bgColor="secondary" textColor="primary">
@@ -427,22 +443,17 @@ class App extends React.Component {
 						lang="jsx"
 						margin="20px auto"
 						overflow="overflow"
-						source={`
-class App extends React.Component {
+						source={`class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { city: 'London' };
+    this.state = {city: 'London'};
   }
 
   selectCity = evt => {
     const newValue = evt.target.value;
     this.setState(state => {
-      if (state.city === newValue) {
-        return null;
-      }
-      return {
-        city: newValue
-      };
+      if (state.city === newValue) { return null; }
+      return {city: newValue};
     });
   };
 
@@ -459,8 +470,7 @@ class App extends React.Component {
       </div>
     );
   }
-}
-`}
+}`}
 					/>
 				</Slide>
 				<Slide transition={['fade']} bgColor="secondary" textColor="primary">
